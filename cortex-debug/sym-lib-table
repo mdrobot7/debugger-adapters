@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "common-components")(type "KiCad")(uri "C:/Users/Michael/DATA/Projects/debugger-adapters/common-components/common-components.kicad_sym")(options "")(descr ""))
+)
