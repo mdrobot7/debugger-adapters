@@ -9,7 +9,10 @@
     (property "Footprint" "common-components:0.05in_Ribbon_Header" (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 0 0 0)
+    (property "Datasheet" "https://www.digikey.com/en/products/detail/cnc-tech/3240-10-00/3883786" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Mates With" "https://www.digikey.com/en/products/detail/cnc-tech/3230-10-0102-00/3883464" (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (symbol "0.05in_Ribbon_Header_0_1"
@@ -71,7 +74,7 @@
     (property "Footprint" "common-components:STLINK_Header" (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 0 0 0)
+    (property "Datasheet" "https://www.digikey.com/en/products/detail/adam-tech/FCS-10-SG/9829300" (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (symbol "STLINK_Header_0_1"
