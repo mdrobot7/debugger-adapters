@@ -7,6 +7,9 @@ All part links are built into the KiCad parts, just generate the BOM from within
 - [Aliexpress STLINKv2](https://www.aliexpress.us/item/3256803389306042.html)
 - [Cortex-debug Ribbon Cable](https://www.digikey.com/en/products/detail/cnc-tech/300-30-10-GR-0100F/5864892)
 
+## Assembly
+The ribbon cable IDC connectors for the Cortex-Debug adapter are quite difficult to get exactly right. If the wire goes in at slightly the wrong angle, the conductors will bridge or connect to the wrong pins. After each connector is put on, check each pin with a multimeter to make sure it's not bridged to anything it shouldn't be.
+
 ## Creating a Black Magic Probe
 Black Magic Probe and Black Magic Debug are open-source SWD/JTAG debug projects for ARM Cortex microcontrollers. It gives you a bare GDB server and is platform-independent, so it will work on ARM Cortex microcontrollers regardless of brand or series.
 
