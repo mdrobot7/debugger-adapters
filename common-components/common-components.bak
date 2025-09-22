@@ -558,7 +558,7 @@
 				)
 			)
 		)
-		(property "Footprint" "common-components:Slide_SP3T"
+		(property "Footprint" ""
 			(at 0 0 0)
 			(effects
 				(font
@@ -577,24 +577,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer Part Number" "CL-SB-13A-01T"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Digikey Part Number" "563-1326-1-ND"
 			(at 0 0 0)
 			(effects
 				(font

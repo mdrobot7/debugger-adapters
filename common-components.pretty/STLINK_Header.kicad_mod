@@ -1,7 +1,7 @@
 (footprint "STLINK_Header"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0.254 4.088 0)
@@ -27,18 +27,6 @@
 			)
 		)
 	)
-	(property "Footprint" "STLINK_Header"
-		(at 0 0 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "9546f40e-96ae-4d9f-9b8b-ae73e8cc4ddd")
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-	)
 	(property "Datasheet" ""
 		(at 0 0 0)
 		(unlocked yes)
@@ -48,6 +36,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -60,6 +49,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -71,7 +61,7 @@
 			(width 0.1)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.SilkS")
 		(uuid "b4598dbe-5544-4dd8-bf00-bc09309c538f")
 	)
@@ -82,7 +72,7 @@
 			(width 0.1)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.SilkS")
 		(uuid "e15f9d3e-c260-4ffe-99e5-dbc5f9329136")
 	)
@@ -267,5 +257,17 @@
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
 		(uuid "5f1162d7-402c-4b41-92c5-93caf2a29a88")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/../common-components.pretty/SFH11-PBPC-D05-ST-BK.STEP"
+		(offset
+			(xyz -17.1 0.6 2.8)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -180)
+		)
 	)
 )
