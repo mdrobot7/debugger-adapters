@@ -40,15 +40,24 @@ Instructions for Linux/Mac:
    - OSX: `brew install meson ninja arm-none-eabi-gcc arm-none-eabi-binutils arm-none-eabi-gdb dfu-util hidapi libftdi libusb`
 3. `git clone https://codeberg.org/blackmagic-debug/blackmagic`
 4. `cd` into the directory you cloned into
-5. Set up the build: `meson setup build --reconfigure --cross-file cross-file/stlink.ini -Dprobe=stlink -Dtargets=cortexar,cortexm,sam,stm,nxp,ti`
+5. Set up the build: `meson setup build --reconfigure --cross-file cross-file/stlink.ini -Dtargets=cortexar,cortexm,sam,stm,nxp,ti -Dbmd_bootloader=true`
    - Which targets you choose are up to you and your use case. The ones shown above are a general recommendation. See [supported targets](https://black-magic.org/supported-targets.html) for others.
-6. Build the binary: `meson compile -C build`
+6. Build the binary and bootloader: `meson compile -C build; meson compile -C boot-bin`
 7. Pull the metal shell off of your BMP-to-be by pulling it towards the USB port. Attach jumper wires to an existing BMP, and wire GND, VCC, SWDIO, and SWCLK to the pins/exposed pads on your BMP-to-be. You can wire it properly, or hold wires onto the pads until the next command is done.
-8. Flash the bootloader: `arm-none-eabi-gdb -ex "tar ext [debugger device ID]" -ex "mon s" -ex "att 1" -ex "mon option erase" -ex "load" -batch build/blackmagic_stlink_firmware.elf`
-   - Find the debugger device ID in /dev. Use /dev/whatever for the following commands.
-9. Plug your new BMP into your PC via USB, **unplug your existing BMP**.
-10. Check that your new BMP shows up: `dfu-util -l`. It should say "found DFU" with some device information.
-11. Flash the BMP firmware: `dfu-util -s 0x08002000:leave:force -D src/blackmagic.bin`
+8. Flash the bootloader
+   - With an existing BMP: `arm-none-eabi-gdb -ex "tar ext [debugger device ID]" -ex "mon s" -ex "att 1" -ex "mon option erase" -ex "load" -batch build/blackmagic_stlink_bootloader.elf`
+     - Find the debugger device ID in /dev. Use /dev/whatever for the following commands.
+     - This worked on some targets (Geehy micros), but not all. I've received knockoff STLinks from AliExpress that have flash protections set up such that it doesn't flash. If so, grab a stock STLink and try the steps below.
+   - With an existing STLink (credit to [this guide](https://microcontrollerelectronics.com/how-to-convert-an-stm32f103c8t6-into-a-black-magic-probe/)):
+     - `sudo apt install openocd stlink-tools`
+     - `sudo vim /usr/share/openocd/scripts/target/stm32f1x.cfg` and add `set CPUTAPID 0` below line 35. This disables CPU ID checking (we're flashing a counterfeit).
+     - Plug in your existing STLinkv2 and connect it to your BMP-to-be.
+     - `openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg -c "init" -c "halt" -c "stm32f1x unlock 0" -c "shutdown" && st-flash erase && st-flash --flash=0x20000 --reset write build/blackmagic_stlink_bootloader.bin 0x8000000`
+9. Plug your new BMP into your PC via USB, **unplug your existing debugger**.
+10. Check that your new BMP shows up: `sudo dfu-util -l`. It should say "found DFU" with some device information.
+11. Flash the BMP firmware: `sudo dfu-util -s 0x08002000:leave:force -D build/blackmagic_stlink_firmware.bin`
 
 ### Upgrading Your BMP
 All you need to do is `git pull` the updated BMP firmware (or make any changes you need to), and rebuild. Plug it in via USB and rerun step 11 above. The bootloader handles reflashing the firmware over USB.
+
+Black Magic Probe releases official binaries as well, so you can also download the `blackmagic-native` BIN file from the [Releases](https://codeberg.org/blackmagic-debug/blackmagic/releases) page and flash it over DFU. It covers a very similar set of debug targets and fits in the 128KB flash of our counterfeit STLinks.
